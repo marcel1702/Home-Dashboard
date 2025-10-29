@@ -63,13 +63,8 @@ async function createApp() {
         index: false,
       })
     );
-    app.get('*', (req, res, next) => {
-      if (
-        req.method !== 'GET' ||
-        req.path.startsWith('/api') ||
-        req.path.includes('.') ||
-        !req.accepts('html')
-      ) {
+    app.get(/^(?!\/api)(?!.*\.[^/]+$).*$/, (req, res, next) => {
+      if (req.method !== 'GET' || !req.accepts('html')) {
         return next();
       }
 
