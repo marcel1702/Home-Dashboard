@@ -54,7 +54,7 @@ async function createService(payload, icon) {
 
   if (icon) {
     data.icon_blob = icon.buffer;
-    data.icon_mime = icon.mimeType;
+    data.icon_mime = icon.mimetype;
   }
 
   const created = await prisma.service.create({ data });
@@ -75,7 +75,7 @@ async function updateService(id, payload, icon) {
 
   if (icon) {
     data.icon_blob = icon.buffer;
-    data.icon_mime = icon.mimeType;
+    data.icon_mime = icon.mimetype;
   }
 
   const updated = await prisma.service.update({
