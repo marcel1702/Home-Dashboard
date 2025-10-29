@@ -7,7 +7,7 @@ Ein modernes, kachelbasiertes Dashboard zur Übersicht deiner internen und exter
 ```
 backend/    Express-API, Auth, Datenbankzugriff
 frontend/   Vue-Frontend (Dashboard + Admin)
-prisma/     Datenbank-Schema & Migrationen
+backend/prisma/     Datenbank-Schema & Migrationen
 scripts/    Hilfsskripte (z. B. Passwort-Hashing)
 docker/     Container-Build & Compose-Stack
 docs/       Weitere Dokumentation
@@ -50,9 +50,10 @@ Das Vite-Dev-Server proxied API-Anfragen nach `http://localhost:8080`.
 
 ## Datenbank & Migration
 
-- Schema siehe `prisma/schema.prisma`.
-- Erste Migration liegt in `prisma/migrations/000-init`.
-- Für lokale Tests kann die Migration mit `npx prisma migrate deploy` angewendet werden (Prisma CLI benötigt Internetzugang für Engine-Download).
+- Schema siehe `backend/prisma/schema.prisma`.
+- Erste Migration liegt in `backend/prisma/migrations/000-init`.
+- Der Produktionsstart (`npm start` oder der Docker-Container) führt automatisch `prisma migrate deploy` aus, damit die Datenbanktabellen vorhanden sind.
+- Für lokale Tests kann die Migration bei Bedarf mit `npm run migrate` angewendet werden (Prisma CLI benötigt Internetzugang für Engine-Download).
 
 ## Docker Build
 
