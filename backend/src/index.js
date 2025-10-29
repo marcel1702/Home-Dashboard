@@ -61,6 +61,11 @@ async function createApp() {
     app.use(
       express.static(staticDir, {
         index: false,
+        setHeaders(res, servedFilePath) {
+          if (servedFilePath.endsWith('index.html')) {
+            res.setHeader('Cache-Control', 'no-store, must-revalidate');
+          }
+        },
       })
     );
     app.get(/^(?!\/api)(?!.*\.[^/]+$).*$/, (req, res, next) => {
@@ -68,6 +73,7 @@ async function createApp() {
         return next();
       }
 
+      res.set('Cache-Control', 'no-store, must-revalidate');
       res.sendFile(path.join(staticDir, 'index.html'));
     });
   }
