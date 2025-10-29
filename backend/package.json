@@ -11,7 +11,7 @@
     "start": "node src/index.js",
     "migrate": "prisma migrate deploy",
     "migrate:dev": "prisma migrate dev",
-    "prisma:generate": "prisma generate",
+    "prisma:generate": "node ./scripts/generate-prisma-client.js",
     "lint": "node ./scripts/check-config.js || exit 0"
   },
   "license": "MIT",
