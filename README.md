@@ -52,7 +52,8 @@ Das Vite-Dev-Server proxied API-Anfragen nach `http://localhost:8080`.
 
 - Schema siehe `backend/prisma/schema.prisma`.
 - Erste Migration liegt in `backend/prisma/migrations/000-init`.
-- Für lokale Tests kann die Migration mit `npx prisma migrate deploy` angewendet werden (Prisma CLI benötigt Internetzugang für Engine-Download).
+- Der Produktionsstart (`npm start` oder der Docker-Container) führt automatisch `prisma migrate deploy` aus, damit die Datenbanktabellen vorhanden sind.
+- Für lokale Tests kann die Migration bei Bedarf mit `npm run migrate` angewendet werden (Prisma CLI benötigt Internetzugang für Engine-Download).
 
 ## Docker Build
 

@@ -24,4 +24,4 @@ ENV SESSION_SECRET=change-me
 ENV MAX_UPLOAD_KB=512
 EXPOSE 8080
 
-CMD ["node", "src/index.js"]
+CMD ["node", "scripts/migrate-and-start.js"]

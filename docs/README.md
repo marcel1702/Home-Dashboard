@@ -26,6 +26,7 @@ Dieses Dokument fasst die Architektur und die wichtigsten Workflows der Home-Das
 1. `npm run build` im Frontend erzeugt `/frontend/dist`.
 2. Docker-Image via `docker build -f docker/Dockerfile -t home-dashboard .` bauen.
 3. Persistente DB über Volume `/data/app.db` einbinden.
+4. Beim Containerstart werden automatisch Prisma-Migrationen ausgeführt (`prisma migrate deploy`), solange die Umgebung `DB_PATH` bzw. `DATABASE_URL` gesetzt ist.
 4. Admin-Passwort-Hash per `scripts/seed-admin.js` generieren und als `ADMIN_PASSWORD_HASH` setzen.
 
 ## Health & Tests
