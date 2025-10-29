@@ -59,10 +59,7 @@ async function createApp() {
   const staticDir = path.resolve(__dirname, '../public');
   if (fs.existsSync(staticDir)) {
     app.use(express.static(staticDir));
-    app.get('*', (req, res, next) => {
-      if (req.path.startsWith('/api')) {
-        return next();
-      }
+    app.get(/^\/(?!api).*/, (req, res) => {
       res.sendFile(path.join(staticDir, 'index.html'));
     });
   }
