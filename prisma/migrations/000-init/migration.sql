@@ -1,0 +1,34 @@
+CREATE TABLE IF NOT EXISTS "service" (
+  "id" TEXT PRIMARY KEY,
+  "title" TEXT NOT NULL,
+  "description" TEXT NOT NULL DEFAULT '',
+  "icon_blob" BLOB,
+  "icon_mime" TEXT,
+  "internal_url" TEXT,
+  "external_url" TEXT,
+  "position" INTEGER NOT NULL,
+  "enabled" INTEGER NOT NULL DEFAULT 1,
+  "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS "admin" (
+  "id" TEXT PRIMARY KEY,
+  "password_hash" TEXT NOT NULL,
+  "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TRIGGER IF NOT EXISTS service_updated_at
+AFTER UPDATE ON service
+FOR EACH ROW
+BEGIN
+  UPDATE service SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id;
+END;
+
+CREATE TRIGGER IF NOT EXISTS admin_updated_at
+AFTER UPDATE ON admin
+FOR EACH ROW
+BEGIN
+  UPDATE admin SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id;
+END;
