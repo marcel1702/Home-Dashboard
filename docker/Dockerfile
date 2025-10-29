@@ -13,7 +13,6 @@ ENV NODE_ENV=production
 COPY backend/package.json backend/package-lock.json ./backend/
 RUN cd backend && npm ci
 COPY backend ./backend
-COPY prisma ./prisma
 RUN cd backend && npm run prisma:generate
 RUN cd backend && npm prune --omit=dev
 COPY --from=frontend /app/frontend/dist ./backend/public

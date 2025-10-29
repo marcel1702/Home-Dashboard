@@ -6,7 +6,7 @@ Dieses Dokument fasst die Architektur und die wichtigsten Workflows der Home-Das
 
 - **Frontend** (`/frontend`): Vite + Vue 3 + Tailwind CSS. Stellt das öffentliche Dashboard sowie den Admin-Bereich bereit.
 - **Backend** (`/backend`): Express-Server mit REST-API, Session-Auth und Prisma-Integration.
-- **Datenbank**: SQLite-Datei (`/data/app.db`). Migrationen liegen in `/prisma/migrations`.
+- **Datenbank**: SQLite-Datei (`/data/app.db`). Migrationen liegen in `/app/backend/prisma/migrations`.
 - **Container**: Dockerfile in `/docker/Dockerfile`, Compose-Stack in `/docker/docker-compose.yml`.
 
 ## Wichtige Features
