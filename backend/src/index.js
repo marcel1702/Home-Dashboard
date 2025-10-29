@@ -58,11 +58,16 @@ async function createApp() {
 
   const staticDir = path.resolve(__dirname, '../public');
   if (fs.existsSync(staticDir)) {
-    app.use(express.static(staticDir));
-    app.get('*', (req, res, next) => {
-      if (req.path.startsWith('/api')) {
+    app.use(
+      express.static(staticDir, {
+        index: false,
+      })
+    );
+    app.get(/^(?!\/api)(?!.*\.[^/]+$).*$/, (req, res, next) => {
+      if (req.method !== 'GET' || !req.accepts('html')) {
         return next();
       }
+
       res.sendFile(path.join(staticDir, 'index.html'));
     });
   }
@@ -75,13 +80,22 @@ async function createApp() {
 
 async function start() {
   const app = await createApp();
-  app.listen(config.port, () => {
-    console.log(`API server listening on port ${config.port}`);
+
+  return new Promise((resolve, reject) => {
+    const server = app.listen(config.port, () => {
+      console.log(`API server listening on port ${config.port}`);
+      resolve(server);
+    });
+
+    server.on('error', reject);
   });
 }
 
 if (require.main === module) {
-  start();
+  start().catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
 }
 
-module.exports = { createApp };
+module.exports = { createApp, start };

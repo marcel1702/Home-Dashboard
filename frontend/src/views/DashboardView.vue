@@ -11,8 +11,20 @@
       <div v-if="error" class="bg-red-50 text-red-700 border border-red-200 rounded-xl p-4 mb-6">
         {{ error }}
       </div>
-      <div v-if="services.length === 0 && !isLoading" class="text-center text-gray-600 py-12">
-        Noch keine Dienste angelegt.
+      <div
+        v-if="services.length === 0 && !isLoading"
+        class="text-center text-gray-600 py-12 space-y-4"
+      >
+        <p class="text-base">Noch keine Dienste angelegt.</p>
+        <p class="text-sm">
+          Melde dich im Admin-Bereich an und füge deine ersten Links hinzu.
+        </p>
+        <RouterLink
+          to="/admin/login"
+          class="inline-flex items-center justify-center rounded-xl bg-gray-900 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-gray-700 transition"
+        >
+          Admin-Bereich öffnen
+        </RouterLink>
       </div>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <ServiceTile v-for="service in services" :key="service.id" :service="service" @select="openModal" />
@@ -24,6 +36,7 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
+import { RouterLink } from 'vue-router';
 import axios from 'axios';
 import ServiceTile from '../components/ServiceTile.vue';
 import LinkSelectionModal from '../components/LinkSelectionModal.vue';
