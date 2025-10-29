@@ -8,10 +8,10 @@
   },
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js",
+    "start": "node ./scripts/migrate-and-start.js",
     "migrate": "prisma migrate deploy",
     "migrate:dev": "prisma migrate dev",
-    "prisma:generate": "prisma generate",
+    "prisma:generate": "node ./scripts/generate-prisma-client.js",
     "lint": "node ./scripts/check-config.js || exit 0"
   },
   "license": "MIT",
@@ -28,11 +28,12 @@
     "joi": "^18.0.1",
     "morgan": "^1.10.1",
     "multer": "^2.0.2",
+    "dotenv": "^16.6.1",
+    "prisma": "^6.18.0",
     "sqlite3": "^5.1.7",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10",
-    "prisma": "^6.18.0"
+    "nodemon": "^3.1.10"
   }
 }
